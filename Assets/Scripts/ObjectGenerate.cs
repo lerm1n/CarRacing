@@ -9,8 +9,9 @@ public class ObjectGenerate : MonoBehaviour
     public float spawnInterval = 2f;
     public float laneDistance = 3f;
     public Transform player;
-
-    private float nextSpawnTime;
+    
+    
+    public float nextSpawnTime;
     
     
     private void Start()

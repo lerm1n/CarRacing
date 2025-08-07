@@ -1,16 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfiniteMovingRoad : MonoBehaviour
+public class MovingRoad : MonoBehaviour
 {
-    [Header("Road Settings")] public GameObject roadSegmentPrefab;
+    public static MovingRoad Instance { get; private set; }
+    
+    [Header("Road Settings")] 
+    public GameObject roadSegmentPrefab;
     public int segmentsToKeep = 5;
     public float segmentLength = 20f;
-    public float roadSpeed = 25f;
-
+    public float roadSpeed = 5f;
+    
     private Queue<GameObject> activeSegments = new Queue<GameObject>();
     private float nextSpawnZ = 0f;
     private float destroyZPosition;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        roadSpeed = GameManager.Instance.initialSpeed;
+    }
 
     void Start()
     {
@@ -70,5 +87,10 @@ public class InfiniteMovingRoad : MonoBehaviour
             GameObject oldSegment = activeSegments.Dequeue();
             Destroy(oldSegment);
         }
+    }
+    
+    public void SetSpeed(float newSpeed)
+    {
+        roadSpeed = newSpeed;
     }
 }    
