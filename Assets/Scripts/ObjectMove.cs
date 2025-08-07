@@ -9,7 +9,6 @@ public class MovingObstacle : MonoBehaviour
 
     private void Start()
     {
-        // Находим контроллер дороги в сцене
         roadController = FindObjectOfType<InfiniteMovingRoad>();
         
         if (roadController == null)
@@ -36,8 +35,7 @@ public class MovingObstacle : MonoBehaviour
     private void CheckIfBehindCamera()
     {
         if (mainCamera == null) return;
-    
-        // Если объект находится за камерой (с учетом дополнительного отступа)
+        
         if (transform.position.z < mainCamera.transform.position.z - destroyOffset)
         {
             Destroy(gameObject);
